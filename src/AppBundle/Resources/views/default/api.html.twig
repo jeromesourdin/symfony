@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}La Liste{% endblock %}
+{% block body %}
+
+<div id="map" style="height: 400px"></div>
+    
+    {{ data.0 }} {{ data.1 }}
+    {{ dump(data2) }}
+
+    {% block javascripts %}
+        <script>
+            function InitialiserCarte() {
+                
+                var map = L.map('map').setView([{{ data.1 }}, {{ data.0 }}], 17);
+
+                // create the tile layer with correct attribution
+                var tuileUrl = 'http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png';
+                
+                var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+                
+                var osm = L.tileLayer(tuileUrl, {
+                    minZoom: 8, 
+                    maxZoom: 17,
+                    attribution: attrib
+                });
+
+                osm.addTo(map);
+                
+                var marker = L.marker([{{ data.1 }}, {{ data.0 }}]).addTo(map);
+            }
+
+            $(document).ready(function(){
+                InitialiserCarte();
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

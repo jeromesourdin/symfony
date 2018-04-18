@@ -18,7 +18,9 @@
                     <th scope="col"> Prix Untitaire </th>
                     <th scope="col"> Conditionnement </th>
                     <th scope="col"> Code barre </th>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <th scope="col"> Actions </th>
+                    {% endif %}
                 </thead>
                 {% for produit in produits %}
                 <tr>
@@ -28,10 +30,12 @@
                     <td> {{ produit.prixunitaire }} </td>
                     <td> {{ produit.conditionnement }} </td>
                     <td> {{ produit.codebarre }} </td>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td> 
                         <a href={{ path('produitSupp',{code: produit.code }) }}><i class="fa fa-trash" aria-hidden="true"></i> </a>
                         <a href={{ path('produitAjout',{code: produit.code }) }}><i class="fa fa-pencil" aria-hidden="true"></i> </a>
                     </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </table>
