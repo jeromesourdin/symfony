@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter{% endblock %}
+{% block body %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1><span>Saisir les informations : </span></h1>
+            </div>
+        </div>
+        
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-md-12">
+                    <label>{{ form_label(form.description) }}</label>
+                    {{ form_widget(form.description,{'attr':{'class':'form-control'}} ) }}
+                    <small id="descHelp" class="form-text text-muted"> {{ form_errors(form.description) }}</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                    <label>{{ form_label(form.code) }}</label>
+                    {% if not code %}
+                        {{ form_widget(form.code,{'attr':{'class':'form-control'}} ) }}
+                        <small id="codeHelp" class="form-text text-muted"> {{ form_errors(form.code) }}</small>
+                    {% else %}
+                        <br><labalclass="form-control">{{ code }}</label>
+                        {{ form_widget(form.code, { 'attr': {'class': 'invisible'} }) }}
+                        <small id="codeHelp" class="form-text text-muted"> {{ form_errors(form.code) }}</small>
+                    {% endif %}
+            </div>
+            <div class="form-group col-md-4">
+                <label>{{ form_label(form.prixunitaire) }}</label>
+                {{ form_widget(form.prixunitaire,{'attr':{'class':'form-control'}} ) }}
+                <small id="prixHelp" class="form-text text-muted"> {{ form_errors(form.prixunitaire) }}</small>
+            </div>
+            <div class="form-group col-md-2">
+                <label>{{ form_label(form.codebarre) }}</label>
+                {{ form_widget(form.codebarre,{'attr':{'class':'form-control'}} ) }}
+                <small id="barreHelp" class="form-text text-muted"> {{ form_errors(form.codebarre) }}</small>
+            </div>
+            <div class="form-group col-md-4">
+                <label>{{ form_label(form.famille) }}</label>
+                {{ form_widget(form.famille,{'attr':{'class':'form-control'}} ) }}
+                <small id="barreHelp" class="form-text text-muted"> {{ form_errors(form.famille) }}</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{{ form_label(form.conditionnement) }}</label>
+                {{ form_widget(form.conditionnement,{'attr':{'class':'form-control'}} ) }}
+                <small id="condHelp" class="form-text text-muted"> {{ form_errors(form.conditionnement) }}</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                {{ form_widget(form.save,{'attr':{'class':'form-control btn-info'}} ) }}
+            </div>
+            <div class="col-md-4">
+                <a href={{ path('produitsliste') }} class="btn btn-primary" role="button">Retour</a>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
+
+
+

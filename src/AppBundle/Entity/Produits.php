@@ -1,0 +1,220 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * produits
+ *
+ * @ORM\Table(name="produits")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\produitsRepository")
+ */
+class Produits
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=20, unique=true)
+     * @Assert\NotBlank()
+     */
+    private $code;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prixunitaire", type="decimal", precision=10, scale=2)
+     */
+    private $prixunitaire;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="conditionnement", type="text", nullable=true)
+     */
+    private $conditionnement;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="codebarre", type="integer", nullable=true)
+     */
+    private $codebarre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProduitFamille", inversedBy="produits")
+     * @ORM\JoinColumn(name="famille_id", referencedColumnName="id")
+     */
+    private $famille;
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set code.
+     *
+     * @param string $code
+     *
+     * @return produits
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set description.
+     *
+     * @param string|null $description
+     *
+     * @return produits
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set prixunitaire.
+     *
+     * @param string $prixunitaire
+     *
+     * @return produits
+     */
+    public function setPrixunitaire($prixunitaire)
+    {
+        $this->prixunitaire = $prixunitaire;
+
+        return $this;
+    }
+
+    /**
+     * Get prixunitaire.
+     *
+     * @return string
+     */
+    public function getPrixunitaire()
+    {
+        return $this->prixunitaire;
+    }
+
+    /**
+     * Set conditionnement.
+     *
+     * @param string|null $conditionnement
+     *
+     * @return produits
+     */
+    public function setConditionnement($conditionnement = null)
+    {
+        $this->conditionnement = $conditionnement;
+
+        return $this;
+    }
+
+    /**
+     * Get conditionnement.
+     *
+     * @return string|null
+     */
+    public function getConditionnement()
+    {
+        return $this->conditionnement;
+    }
+
+    /**
+     * Set codebarre.
+     *
+     * @param int|null $codebarre
+     *
+     * @return produits
+     */
+    public function setCodebarre($codebarre = null)
+    {
+        $this->codebarre = $codebarre;
+
+        return $this;
+    }
+
+    /**
+     * Get codebarre.
+     *
+     * @return int|null
+     */
+    public function getCodebarre()
+    {
+        return $this->codebarre;
+    }
+
+    /**
+     * Set famille.
+     *
+     * @param \AppBundle\Entity\ProduitFamille|null $famille
+     *
+     * @return Produits
+     */
+    public function setFamille(\AppBundle\Entity\ProduitFamille $famille = null)
+    {
+        $this->famille = $famille;
+
+        return $this;
+    }
+
+    /**
+     * Get famille.
+     *
+     * @return \AppBundle\Entity\ProduitFamille|null
+     */
+    public function getFamille()
+    {
+        return $this->famille;
+    }
+}

@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+Fait ! Produit {{produit | upper}} supprimé. <br />
+<a href={{ path('produitsliste') }}> retour </a>
+{% endblock %}
+

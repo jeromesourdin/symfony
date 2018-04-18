@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}La Liste{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1><span>Liste des Produits : </span></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <th scope="col"> Code </th>
+                    <th scope="col"> Description </th>
+                    <th scope="col"> Famille </th>
+                    <th scope="col"> Prix Untitaire </th>
+                    <th scope="col"> Conditionnement </th>
+                    <th scope="col"> Code barre </th>
+                    <th scope="col"> Actions </th>
+                </thead>
+                {% for produit in produits %}
+                <tr>
+                    <th scope="row"> {{ produit.code }} </td>
+                    <td> {{ produit.description }} </td>
+                    <th> {{ produit.famille.libelle }} </td>
+                    <td> {{ produit.prixunitaire }} </td>
+                    <td> {{ produit.conditionnement }} </td>
+                    <td> {{ produit.codebarre }} </td>
+                    <td> 
+                        <a href={{ path('produitSupp',{code: produit.code }) }}><i class="fa fa-trash" aria-hidden="true"></i> </a>
+                        <a href={{ path('produitAjout',{code: produit.code }) }}><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href={{ path('produitAjout') }} class="btn btn-info" role="button">Ajouter</a>
+            </div>
+        </div>
+    </div>
+</div>
+{# {{ dump(produits) }} #}
+{% endblock %}
+
+
