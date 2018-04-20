@@ -6,13 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * produits
+ * Produit
  *
  * @ORM\Table(name="produits")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\produitsRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProduitRepository")
  */
-class Produits
+class Produit
 {
+    
+    
     /**
      * @var int
      *
@@ -57,6 +59,20 @@ class Produits
      * @ORM\Column(name="codebarre", type="integer", nullable=true)
      */
     private $codebarre;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="dateajout", type="date", nullable=true)
+     */
+    private $dateajout;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="datesup", type="date", nullable=true)
+     */
+    private $datesup;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitFamille", inversedBy="produits")
@@ -216,5 +232,77 @@ class Produits
     public function getFamille()
     {
         return $this->famille;
+    }
+
+    /**
+     * Set dateajout.
+     *
+     * @param \DateTime $dateajout
+     *
+     * @return Produits
+     */
+    public function setDateajout($dateajout)
+    {
+        $this->dateajout = $dateajout;
+
+        return $this;
+    }
+
+    /**
+     * Get dateajout.
+     *
+     * @return \DateTime
+     */
+    public function getDateajout()
+    {
+        return $this->dateajout;
+    }
+
+    /**
+     * Set datesup.
+     *
+     * @param \DateTime $datesup
+     *
+     * @return Produits
+     */
+    public function setDatesup($datesup)
+    {
+        $this->datesup = $datesup;
+
+        return $this;
+    }
+
+    /**
+     * Get datesup.
+     *
+     * @return \DateTime
+     */
+    public function getDatesup()
+    {
+        return $this->datesup;
+    }
+
+    /**
+     * Set idParain.
+     *
+     * @param \AppBundle\Entity\Client|null $idParain
+     *
+     * @return Produit
+     */
+    public function setIdParain(\AppBundle\Entity\Client $idParain = null)
+    {
+        $this->IdParain = $idParain;
+
+        return $this;
+    }
+
+    /**
+     * Get idParain.
+     *
+     * @return \AppBundle\Entity\Client|null
+     */
+    public function getIdParain()
+    {
+        return $this->IdParain;
     }
 }
