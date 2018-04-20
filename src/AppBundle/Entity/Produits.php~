@@ -59,6 +59,20 @@ class Produits
     private $codebarre;
 
     /**
+     * @var date
+     *
+     * @ORM\Column(name="dateajout", type="date")
+     */
+    private $dateajout;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="datesup", type="date")
+     */
+    private $datesup;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ProduitFamille", inversedBy="produits")
      * @ORM\JoinColumn(name="famille_id", referencedColumnName="id")
      */
@@ -192,5 +206,29 @@ class Produits
     public function getCodebarre()
     {
         return $this->codebarre;
+    }
+
+    /**
+     * Set famille.
+     *
+     * @param \AppBundle\Entity\ProduitFamille|null $famille
+     *
+     * @return Produits
+     */
+    public function setFamille(\AppBundle\Entity\ProduitFamille $famille = null)
+    {
+        $this->famille = $famille;
+
+        return $this;
+    }
+
+    /**
+     * Get famille.
+     *
+     * @return \AppBundle\Entity\ProduitFamille|null
+     */
+    public function getFamille()
+    {
+        return $this->famille;
     }
 }

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManagerInterface;
-use AppBundle\Entity\Produits;
+use AppBundle\Entity\Produit;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -36,7 +36,7 @@ class ProduitsController extends Controller
     {
 
         $produits = $this->getDoctrine()
-        ->getRepository(Produits::class)
+        ->getRepository(Produit::class)
         ->findAll();
 
         // replace this example code with whatever you need
@@ -56,12 +56,12 @@ class ProduitsController extends Controller
 
         if (is_null($code))
         {
-            $produit = new Produits();
+            $produit = new Produit();
         }
         else 
         {
             $entityManager = $this->getDoctrine()->getManager();
-            $produit = $entityManager->getRepository(Produits::class)->findOneByCode($code);
+            $produit = $entityManager->getRepository(Produit::class)->findOneByCode($code);
     
             if (!$produit) {
                 throw $this->createNotFoundException(
@@ -97,6 +97,8 @@ class ProduitsController extends Controller
             $entityManager->flush();
     
             return $this->redirectToRoute('produitsliste');
+
+            $this->addFlash('Produit Ajouté');
         }
         
         return $this->render('@App/default/produitAjout.html.twig', array(
@@ -111,7 +113,7 @@ class ProduitsController extends Controller
     public function suppAction($code)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $produit = $entityManager->getRepository(Produits::class)->findOneByCode($code);
+        $produit = $entityManager->getRepository(Produit::class)->findOneByCode($code);
 
         $entityManager->remove($produit);
         $entityManager->flush();
@@ -119,6 +121,24 @@ class ProduitsController extends Controller
         return $this->render('@App/default/produitSupp.html.twig', array(
             'produit' => $code
         ));
+    }
+
+    /**
+     * @Route("/produit/cherche/{date}", name="cherche")
+     */
+    public function chercheAction($date)
+    {
+        $date = date($date);
+
+        $repository = $this->getDoctrine()->getRepository(Produit::class);
+
+        $produits = $repository->findParDate2($date);
+
+        return $this->render('@App/default/cherche.html.twig', array(
+            'produits' => $produits,
+            'date' => $date
+        ));
+
     }
 
     /**

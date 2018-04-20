@@ -29,7 +29,7 @@ class ProduitFamille
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produits", mappedBy="famille")
+     * @ORM\OneToMany(targetEntity="Produit", mappedBy="famille")
      */
     private $produits;
 
@@ -77,11 +77,11 @@ class ProduitFamille
     /**
      * Add produit.
      *
-     * @param \AppBundle\Entity\Produits $produit
+     * @param \AppBundle\Entity\Produit $produit
      *
      * @return ProduitFamille
      */
-    public function addProduit(\AppBundle\Entity\Produits $produit)
+    public function addProduit(\AppBundle\Entity\Produit $produit)
     {
         $this->produits[] = $produit;
 
@@ -91,17 +91,17 @@ class ProduitFamille
     /**
      * Remove produit.
      *
-     * @param \AppBundle\Entity\Produits $produit
+     * @param \AppBundle\Entity\Produit $produit
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeProduit(\AppBundle\Entity\Produits $produit)
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
     {
         return $this->produits->removeElement($produit);
     }
 
     /**
-     * Get produits.
+     * Get produit.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
